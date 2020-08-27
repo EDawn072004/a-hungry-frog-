@@ -1,6 +1,6 @@
 # setup
 scene.set_background_color(9)
-info.set_life(0)
+info.set_life(1)
 info.set_score(0)
 
 # Frog
@@ -28,6 +28,7 @@ Frog = sprites.create(img("""
 """))
 Frog.set_position(10, 60)
 Frog.set_flag(SpriteFlag.StayInScreen, True)
+Frog.set_kind(SpriteKind.player)
 
 # frog movement 
 controller.move_sprite(Frog, 200, 200)
@@ -47,6 +48,7 @@ def on_update_interval():
     """))
     Cheez_it.set_position(scene.screen_width(), randint(20, 100))
     Cheez_it.set_velocity(-50, 0)
+    Cheez_it.set_kind(SpriteKind.Food)
 game.on_update_interval(1000, on_update_interval)
 
 # rivals
@@ -71,6 +73,7 @@ def on_update2_interval():
     """))
     rivals.set_position(scene.screen_width(), randint(20, 100))
     rivals.set_velocity(-50, 0)
+    rivals.set_kind(SpriteKind.enemy)
 game.on_update_interval(1200, on_update2_interval)
 
 # killing rivals
@@ -83,3 +86,16 @@ def on_event_pressed2():
         . . . . .
     """), Frog, 50, 0)
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_event_pressed2)
+def on_overlap2(sprite, otherSprite):
+    sprite.destroy()
+    otherSprite.destroy()
+    info.change_score_by(1)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_overlap2)
+
+# lose life
+def on_overlap(sprite, otherSprite):
+    otherSprite.destroy()
+    info.change_life_by(-1)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_overlap)
+
+

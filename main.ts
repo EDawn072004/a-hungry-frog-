@@ -1,6 +1,6 @@
 //  setup
 scene.setBackgroundColor(9)
-info.setLife(0)
+info.setLife(1)
 info.setScore(0)
 //  Frog
 let Frog = sprites.create(img`
@@ -27,6 +27,7 @@ let Frog = sprites.create(img`
 `)
 Frog.setPosition(10, 60)
 Frog.setFlag(SpriteFlag.StayInScreen, true)
+Frog.setKind(SpriteKind.Player)
 //  frog movement 
 controller.moveSprite(Frog, 200, 200)
 //  cheez it 
@@ -44,6 +45,7 @@ game.onUpdateInterval(1000, function on_update_interval() {
     `)
     Cheez_it.setPosition(scene.screenWidth(), randint(20, 100))
     Cheez_it.setVelocity(-50, 0)
+    Cheez_it.setKind(SpriteKind.Food)
 })
 //  rivals
 game.onUpdateInterval(1200, function on_update2_interval() {
@@ -67,6 +69,7 @@ game.onUpdateInterval(1200, function on_update2_interval() {
     `)
     rivals.setPosition(scene.screenWidth(), randint(20, 100))
     rivals.setVelocity(-50, 0)
+    rivals.setKind(SpriteKind.Enemy)
 })
 //  killing rivals
 controller.A.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed2() {
@@ -77,4 +80,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed2()
         1 1 1 1 .
         . . . . .
     `, Frog, 50, 0)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_overlap2(sprite: Sprite, otherSprite: Sprite) {
+    sprite.destroy()
+    otherSprite.destroy()
+    info.changeScoreBy(1)
+})
+//  lose life
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_overlap(sprite: Sprite, otherSprite: Sprite) {
+    otherSprite.destroy()
+    info.changeLifeBy(-1)
 })
