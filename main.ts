@@ -30,7 +30,8 @@ Frog.setFlag(SpriteFlag.StayInScreen, true)
 //  frog movement 
 controller.moveSprite(Frog, 200, 200)
 //  cheez it 
-let Cheez_it = sprites.create(img`
+game.onUpdateInterval(1000, function on_update_interval() {
+    let Cheez_it = sprites.create(img`
     4 4 4 4 4 4 4 . . . .
     4 e 4 4 4 e 4 . . . .
     4 4 4 e 4 4 4 . . . .
@@ -40,6 +41,30 @@ let Cheez_it = sprites.create(img`
     . . . . . . . . . . .
     . . . . . . . . . . .
     . . . . . . . . . . .
-`)
-Cheez_it.setPosition(scene.screenWidth(), randint(0, scene.screenHeight()))
-Cheez_it.setVelocity(-50, 0)
+    `)
+    Cheez_it.setPosition(scene.screenWidth(), randint(20, scene.screenHeight()))
+    Cheez_it.setVelocity(-50, 0)
+})
+//  rivals
+game.onUpdateInterval(1200, function on_update2_interval() {
+    let rivals = sprites.create(img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . 1 . . . . .
+        . . . . . . . . f 1 1 1 f . . .
+        . . . f f f f . f 1 1 1 f f . .
+        . . . f 1 f f f f 1 1 1 f f . .
+        . . . f f f f f f f f f f f . .
+        . . . f 1 f f f f 1 1 1 f f . .
+        . . . f f f f . f 1 1 1 f f . .
+        . . . . . . . . f 1 1 1 f . . .
+        . . . . . . . . . . 1 . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `)
+    rivals.setPosition(scene.screenWidth(), randint(20, scene.screenHeight()))
+    rivals.setVelocity(-50, 0)
+})
