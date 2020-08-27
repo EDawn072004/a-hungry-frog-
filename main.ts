@@ -1,0 +1,4 @@
+//  setup
+scene.setBackgroundColor(15)
+info.setLife(3)
+info.setScore(0)
