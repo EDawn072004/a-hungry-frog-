@@ -20,8 +20,6 @@ def on_on_overlap(sprite, otherSprite):
     otherSprite.destroy()
     if info.life() < 10:
         info.change_life_by(1)
-    
-    
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 def on_on_overlap2(sprite, otherSprite):
@@ -45,6 +43,8 @@ Frog: Sprite = None
 scene.set_background_color(9)
 info.set_life(1)
 info.set_score(0)
+info.start_countdown(20)
+
 # Frog
 Frog = sprites.create(img("""
         . . . . . . . . . . . . . . 7 7 . . . . 
@@ -122,6 +122,3 @@ def on_update_interval2():
     rivals.set_velocity(-50, 0)
     rivals.set_kind(SpriteKind.enemy)
 game.on_update_interval(1200, on_update_interval2)
-
-
-

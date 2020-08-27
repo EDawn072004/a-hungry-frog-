@@ -35,6 +35,7 @@ let Frog : Sprite = null
 scene.setBackgroundColor(9)
 info.setLife(1)
 info.setScore(0)
+info.startCountdown(20)
 //  Frog
 Frog = sprites.create(img`
         . . . . . . . . . . . . . . 7 7 . . . . 
