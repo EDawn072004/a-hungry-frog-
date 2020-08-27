@@ -91,7 +91,7 @@ def on_update_interval():
     Cheez_it.set_position(scene.screen_width(), randint(20, 100))
     Cheez_it.set_velocity(-50, 0)
     Cheez_it.set_kind(SpriteKind.food)
-    if info.score() > 5:
+    if info.score() > 19:
         game.over(True)
 game.on_update_interval(1000, on_update_interval)
 
