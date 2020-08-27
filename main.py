@@ -43,8 +43,6 @@ Frog: Sprite = None
 scene.set_background_color(9)
 info.set_life(1)
 info.set_score(0)
-info.start_countdown(20)
-
 # Frog
 Frog = sprites.create(img("""
         . . . . . . . . . . . . . . 7 7 . . . . 
@@ -93,6 +91,8 @@ def on_update_interval():
     Cheez_it.set_position(scene.screen_width(), randint(20, 100))
     Cheez_it.set_velocity(-50, 0)
     Cheez_it.set_kind(SpriteKind.food)
+    if info.score() > 5:
+        game.over(True)
 game.on_update_interval(1000, on_update_interval)
 
 # rivals
