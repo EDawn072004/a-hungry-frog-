@@ -1,6 +1,6 @@
 //  setup
 scene.setBackgroundColor(9)
-info.setLife(3)
+info.setLife(0)
 info.setScore(0)
 //  Frog
 let Frog = sprites.create(img`
