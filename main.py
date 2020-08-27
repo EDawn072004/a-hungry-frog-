@@ -45,7 +45,7 @@ def on_update_interval():
     . . . . . . . . . . .
     . . . . . . . . . . .
     """))
-    Cheez_it.set_position(scene.screen_width(), randint(20, scene.screen_height()))
+    Cheez_it.set_position(scene.screen_width(), randint(20, 100))
     Cheez_it.set_velocity(-50, 0)
 game.on_update_interval(1000, on_update_interval)
 
@@ -69,6 +69,17 @@ def on_update2_interval():
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     """))
-    rivals.set_position(scene.screen_width(), randint(20, scene.screen_height()))
+    rivals.set_position(scene.screen_width(), randint(20, 100))
     rivals.set_velocity(-50, 0)
 game.on_update_interval(1200, on_update2_interval)
+
+# killing rivals
+def on_event_pressed2():
+    spit = sprites.create_projectile_from_sprite(img("""
+        . . . . .
+        1 1 1 1 .
+        . 1 1 1 1
+        1 1 1 1 .
+        . . . . .
+    """), Frog, 50, 0)
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_event_pressed2)

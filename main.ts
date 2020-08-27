@@ -42,7 +42,7 @@ game.onUpdateInterval(1000, function on_update_interval() {
     . . . . . . . . . . .
     . . . . . . . . . . .
     `)
-    Cheez_it.setPosition(scene.screenWidth(), randint(20, scene.screenHeight()))
+    Cheez_it.setPosition(scene.screenWidth(), randint(20, 100))
     Cheez_it.setVelocity(-50, 0)
 })
 //  rivals
@@ -65,6 +65,16 @@ game.onUpdateInterval(1200, function on_update2_interval() {
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     `)
-    rivals.setPosition(scene.screenWidth(), randint(20, scene.screenHeight()))
+    rivals.setPosition(scene.screenWidth(), randint(20, 100))
     rivals.setVelocity(-50, 0)
+})
+//  killing rivals
+controller.A.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed2() {
+    let spit = sprites.createProjectileFromSprite(img`
+        . . . . .
+        1 1 1 1 .
+        . 1 1 1 1
+        1 1 1 1 .
+        . . . . .
+    `, Frog, 50, 0)
 })
