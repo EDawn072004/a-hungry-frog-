@@ -1,4 +1,4 @@
-# killing rivals
+# killing enemy
 
 def on_a_pressed():
     global spit
@@ -17,15 +17,19 @@ controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 # eat cheez it
 
 def on_on_overlap(sprite, otherSprite):
+    global Cheez_itEaten
     otherSprite.destroy()
-    if info.life() < 10:
+    Cheez_itEaten += 1
+    if info.life() > 6:
         info.change_life_by(1)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
+
 
 def on_on_overlap2(sprite, otherSprite):
     sprite.destroy()
     otherSprite.destroy()
     info.change_score_by(1)
+    rivals.ax += rivals.vx - 30
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
 
 # lose life
@@ -34,15 +38,17 @@ def on_on_overlap3(sprite, otherSprite):
     otherSprite.destroy()
     info.change_life_by(-1)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap3)
-
-rivals: Sprite = None
+Cheez_itEaten = 0
 Cheez_it: Sprite = None
+rivals: Sprite = None
 spit: Sprite = None
 Frog: Sprite = None
+rivalsSpeed = -50
 # setup
 scene.set_background_color(9)
-info.set_life(1)
+info.set_life(2)
 info.set_score(0)
+print(Cheez_itEaten)
 # Frog
 Frog = sprites.create(img("""
         . . . . . . . . . . . . . . 7 7 . . . . 
@@ -119,6 +125,6 @@ def on_update_interval2():
         """),
         0)
     rivals.set_position(scene.screen_width(), randint(20, 100))
-    rivals.set_velocity(-50, 0)
+    rivals.set_velocity(rivalsSpeed, 0)
     rivals.set_kind(SpriteKind.enemy)
 game.on_update_interval(1200, on_update_interval2)

@@ -1,4 +1,4 @@
-//  killing rivals
+//  killing enemy
 controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
     
     spit = sprites.createProjectileFromSprite(img`
@@ -11,8 +11,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
 })
 //  eat cheez it
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
+    
     otherSprite.destroy()
-    if (info.life() < 10) {
+    Cheez_itEaten += 1
+    if (Cheez_itEaten/5 > 6) {
         info.changeLifeBy(1)
     }
     
@@ -21,20 +23,24 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_on_overla
     sprite.destroy()
     otherSprite.destroy()
     info.changeScoreBy(1)
+    rivals.ax += rivals.vx - 30
 })
 //  lose life
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap3(sprite: Sprite, otherSprite: Sprite) {
     otherSprite.destroy()
     info.changeLifeBy(-1)
 })
-let rivals : Sprite = null
+let Cheez_itEaten = 0
 let Cheez_it : Sprite = null
+let rivals : Sprite = null
 let spit : Sprite = null
 let Frog : Sprite = null
+let rivalsSpeed = -50
 //  setup
 scene.setBackgroundColor(9)
-info.setLife(1)
+info.setLife(2)
 info.setScore(0)
+console.log(Cheez_itEaten)
 //  Frog
 Frog = sprites.create(img`
         . . . . . . . . . . . . . . 7 7 . . . . 
@@ -107,6 +113,6 @@ game.onUpdateInterval(1200, function on_update_interval2() {
                     . . . . . . . . . . . . . . . .
         `, 0)
     rivals.setPosition(scene.screenWidth(), randint(20, 100))
-    rivals.setVelocity(-50, 0)
+    rivals.setVelocity(rivalsSpeed, 0)
     rivals.setKind(SpriteKind.Enemy)
 })
