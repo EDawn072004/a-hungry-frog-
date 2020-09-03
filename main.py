@@ -20,16 +20,17 @@ def on_on_overlap(sprite, otherSprite):
     global Cheez_itEaten
     otherSprite.destroy()
     Cheez_itEaten += 1
-    if info.life() > 6:
+    if Cheez_itEaten > 4:
         info.change_life_by(1)
+        Cheez_itEaten = 0
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
-
 def on_on_overlap2(sprite, otherSprite):
+    global rivalsSpeed
     sprite.destroy()
     otherSprite.destroy()
     info.change_score_by(1)
-    rivals.ax += rivals.vx - 30
+    rivalsSpeed += -30
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
 
 # lose life
@@ -38,11 +39,12 @@ def on_on_overlap3(sprite, otherSprite):
     otherSprite.destroy()
     info.change_life_by(-1)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap3)
-Cheez_itEaten = 0
+
 Cheez_it: Sprite = None
 rivals: Sprite = None
 spit: Sprite = None
 Frog: Sprite = None
+Cheez_itEaten = 0
 rivalsSpeed = -50
 # setup
 scene.set_background_color(9)
@@ -51,26 +53,26 @@ info.set_score(0)
 print(Cheez_itEaten)
 # Frog
 Frog = sprites.create(img("""
-        . . . . . . . . . . . . . . 7 7 . . . . 
-            . . . . . . . . . . . . . 7 7 7 7 . . . 
-            . . . . . . . . . . . . 7 7 7 1 1 . . . 
-            . . . . . . . 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . . . 7 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . . 7 7 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 1 1 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 f f f f . . . 
-            . . . . 7 7 7 7 7 7 7 7 f . . . . . . . 
-            . . . . 7 7 7 7 7 7 7 7 f . . . . . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 f f f f . . . 
-            . . . . . 7 7 7 7 7 7 7 7 7 7 7 . . . . 
-            . . . . . . 7 7 7 7 7 7 7 7 7 . . . . . 
-            . . . . . . . 7 7 7 7 7 7 7 . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . .
+        ..............77....
+            .............7777...
+            ............77711...
+            .......777777771f...
+            ......7777777771f...
+            .....77777777771f...
+            ....7777777777711...
+            ....7777777777777...
+            ....7777777777777...
+            ....777777777ffff...
+            ....77777777f.......
+            ....77777777f.......
+            ....777777777ffff...
+            .....77777777777....
+            ......777777777.....
+            .......7777777......
+            ....................
+            ....................
+            ....................
+            ....................
     """),
     0)
 Frog.set_position(10, 60)

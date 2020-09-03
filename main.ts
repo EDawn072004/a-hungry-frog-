@@ -14,27 +14,29 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function on_on_overlap(spr
     
     otherSprite.destroy()
     Cheez_itEaten += 1
-    if (Cheez_itEaten/5 > 6) {
+    if (Cheez_itEaten > 4) {
         info.changeLifeBy(1)
+        Cheez_itEaten = 0
     }
     
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_on_overlap2(sprite: Sprite, otherSprite: Sprite) {
+    
     sprite.destroy()
     otherSprite.destroy()
     info.changeScoreBy(1)
-    rivals.ax += rivals.vx - 30
+    rivalsSpeed += -30
 })
 //  lose life
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap3(sprite: Sprite, otherSprite: Sprite) {
     otherSprite.destroy()
     info.changeLifeBy(-1)
 })
-let Cheez_itEaten = 0
 let Cheez_it : Sprite = null
 let rivals : Sprite = null
 let spit : Sprite = null
 let Frog : Sprite = null
+let Cheez_itEaten = 0
 let rivalsSpeed = -50
 //  setup
 scene.setBackgroundColor(9)
@@ -43,26 +45,26 @@ info.setScore(0)
 console.log(Cheez_itEaten)
 //  Frog
 Frog = sprites.create(img`
-        . . . . . . . . . . . . . . 7 7 . . . . 
-            . . . . . . . . . . . . . 7 7 7 7 . . . 
-            . . . . . . . . . . . . 7 7 7 1 1 . . . 
-            . . . . . . . 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . . . 7 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . . 7 7 7 7 7 7 7 7 7 7 1 f . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 1 1 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 f f f f . . . 
-            . . . . 7 7 7 7 7 7 7 7 f . . . . . . . 
-            . . . . 7 7 7 7 7 7 7 7 f . . . . . . . 
-            . . . . 7 7 7 7 7 7 7 7 7 f f f f . . . 
-            . . . . . 7 7 7 7 7 7 7 7 7 7 7 . . . . 
-            . . . . . . 7 7 7 7 7 7 7 7 7 . . . . . 
-            . . . . . . . 7 7 7 7 7 7 7 . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . .
+        ..............77....
+            .............7777...
+            ............77711...
+            .......777777771f...
+            ......7777777771f...
+            .....77777777771f...
+            ....7777777777711...
+            ....7777777777777...
+            ....7777777777777...
+            ....777777777ffff...
+            ....77777777f.......
+            ....77777777f.......
+            ....777777777ffff...
+            .....77777777777....
+            ......777777777.....
+            .......7777777......
+            ....................
+            ....................
+            ....................
+            ....................
     `, 0)
 Frog.setPosition(10, 60)
 Frog.setFlag(SpriteFlag.StayInScreen, true)
