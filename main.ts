@@ -25,7 +25,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_on_overla
     sprite.destroy()
     otherSprite.destroy()
     info.changeScoreBy(1)
-    rivalsSpeed += -30
+    rivalsSpeed += -10
 })
 //  lose life
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap3(sprite: Sprite, otherSprite: Sprite) {

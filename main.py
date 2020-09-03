@@ -30,7 +30,7 @@ def on_on_overlap2(sprite, otherSprite):
     sprite.destroy()
     otherSprite.destroy()
     info.change_score_by(1)
-    rivalsSpeed += -30
+    rivalsSpeed += -10
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
 
 # lose life
